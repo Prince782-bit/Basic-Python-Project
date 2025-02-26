@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Stopwatch</title>
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+    .stopwatch {
+        text-align: center;
+    }
+
+    #display {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        background-color: cadetblue;
+        border: none;
+        border-radius: 5px;
+        color: #282c34;
+        font-size: 20px;
+        margin: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        button:hover {
+            background-color: #21a1f1;
+        }
+</style>
+<body>
+    <div class="stopwatch">
+        <h1 id="display">00:00:00</h1>
+        <div class="buttons">
+            <button id="startBtn">Start</button>
+            <button id="stopBtn">Stop</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+    <script>
+        let timer;
+        let isRunning = false;
+        let seconds = 0;
+
+        const display = document.getElementById('display');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function formatTime(secs) {
+            const hours = String(Math.floor(secs / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+            const seconds = String(secs % 60).padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        function updateDisplay() {
+            display.textContent = formatTime(seconds);
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (!isRunning) {
+                isRunning = true;
+                timer = setInterval(() => {
+                    seconds++;
+                    updateDisplay();
+                }, 1000);
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (isRunning) {
+                isRunning = false;
+                clearInterval(timer);
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            isRunning = false;
+            clearInterval(timer);
+            seconds = 0;
+            updateDisplay();
+        });
+
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>

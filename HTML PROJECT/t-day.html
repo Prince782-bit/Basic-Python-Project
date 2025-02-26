@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Teachers days</title>
+</head>
+
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #card-form {
+        margin-bottom: 20px;
+    }
+
+    #card-container {
+        margin-top: 20px;
+    }
+
+    .card {
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+</style>
+
+
+<body>
+
+    <div class="container">
+        <h1>Thank You, Teacher</h1>
+        <form id="card-form">
+            <label for="teacher-name">Teacher's Name:</label>
+            <input type="text" id="teacher-name" required>
+            <br>
+            <label for="message">Message:</label>
+            <textarea id="message" required></textarea>
+            <br>
+            <button id="generate-card">Generate Card</button>
+        </form>
+        <div id="card-container"></div>
+        </div>
+
+
+    <script>
+
+        const form = document.getElementById('card-form');
+        const cardContainer = document.getElementById('card-container');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const teacherName = document.getElementById('teacher-name').value;
+            const message = document.getElementById('message').value;
+            generateCard(teacherName, message);
+        });
+
+        function generateCard(teacherName, message) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+        <h2>Dear ${teacherName},</h2>
+        <p>${message}</p>
+        <p>Thank you for all that you do!</p>
+    `;
+            cardContainer.appendChild(card);
+        }
+
+    </script>
+
+
+
+
+</body>
+</html>
