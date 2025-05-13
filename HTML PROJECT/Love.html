@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Love Website</title>
+<style>
+  /* Reset and base styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+
+  body {
+    padding: 20px;
+  }
+
+  .container {
+    text-align: center;
+    max-width: 320px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    padding: 25px 20px 40px 20px;
+    box-shadow: 0 8px 30px rgba(255, 105, 135, 0.5);
+    user-select: none;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff2d55;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #ff3b6a;
+    letter-spacing: 2px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff0f1;
+    margin-bottom: 25px;
+    text-shadow: 0 0 5px #a13b5c;
+  }
+
+  button {
+    background-color: #ff2d55;
+    border: none;
+    border-radius: 35px;
+    padding: 12px 35px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 5px 15px #ff3b6aaa;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #ff3b6a;
+    box-shadow: 0 10px 25px #ff3b6aff;
+  }
+
+  /* Heart icon styles */
+  .heart {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: #ff2d55;
+    transform: rotate(-45deg);
+    animation: floatUp linear forwards;
+  }
+  .heart:before,
+  .heart:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff2d55;
+    border-radius: 50%;
+  }
+  .heart:before {
+    top: 0;
+    left: 10px;
+  }
+  .heart:after {
+    top: 10px;
+    left: 0;
+  }
+
+  /* Float animation */
+  @keyframes floatUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0) rotate(-45deg) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-250px) rotate(-45deg) scale(0.5);
+    }
+  }
+
+  /* Responsive text sizes for small mobile */
+  @media (max-width: 350px) {
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+    .container {
+      max-width: 90vw;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Love is in the Air ❤️</h1>
+    <p>Every moment with you is a beautiful memory in the making. Shine bright and keep your heart open.</p>
+    <button id="loveButton" aria-label="Send some love">Send Love</button>
+  </div>
+
+<script>
+  // Function to create a floating heart at a random horizontal position
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.bottom = '0px';
+    // Random animation duration between 3s and 6s
+    const duration = Math.random() * 3 + 3;
+    heart.style.animationDuration = duration + 's';
+
+    document.body.appendChild(heart);
+
+    // Remove the heart element after animation ends
+    heart.addEventListener('animationend', () => {
+      heart.remove();
+    });
+  }
+
+  // Create a few continuous hearts floating
+  setInterval(createHeart, 500);
+
+  // Button event to create burst of hearts on click
+  const loveButton = document.getElementById('loveButton');
+  loveButton.addEventListener('click', () => {
+    // Create 20 hearts in burst
+    for (let i = 0; i < 20; i++) {
+      setTimeout(createHeart, i * 100);
+    }
+  });
+</script>
+</body>
+</html>
+
